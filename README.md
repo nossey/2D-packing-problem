@@ -1,2 +1,3 @@
 # Bin-packing-problem
-This project produces a simple bin packing solver.
+This project is work in progress.
+This project will produce a simple bin packing solver.
