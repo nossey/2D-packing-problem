@@ -156,7 +156,6 @@
     <ClInclude Include="imagePacker.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="rect.h" />
-    <ClInclude Include="trivial.hpp" />
     <ClInclude Include="util.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

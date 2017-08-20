@@ -97,12 +97,12 @@ void Node::setRect(Rect rc)
 	mRect = rc;
 }
 
-s32 Node::getID() const
+int Node::getID() const
 {
 	return mID;
 }
 
-void Node::setID(s32 id)
+void Node::setID(int id)
 {
 	mID = id;
 }

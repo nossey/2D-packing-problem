@@ -35,9 +35,6 @@
     <ClInclude Include="rect.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="trivial.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="CImg.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>

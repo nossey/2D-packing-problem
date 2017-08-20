@@ -2,8 +2,6 @@
 #include <string>
 #include <random>
 using namespace std;
-
-#include "trivial.hpp"
 #include "image.h"
 #include "imagePacker.h"
 #include "node.h"
@@ -11,10 +9,10 @@ using namespace std;
 namespace
 {
 	const string AtlasFileName = "result.bmp";
-	const u32 GenerateBinCount = 1000;
-	const u32 InitialSeed = 10;
+	const unsigned int GenerateBinCount = 500;
+	const unsigned int RandomSeed = 0;
 
-	mt19937 GlobalMt(InitialSeed);
+	mt19937 GlobalMt(RandomSeed);
 	uniform_int_distribution<int> ColorRange(0, 255);
 	void RandomColor(unsigned char* color)
 	{
@@ -24,32 +22,53 @@ namespace
 	}
 }
 
+struct ImageHandle
+{
+	Image image;
+	int id = 0;
+};
+
 void main()
 {
-	vector<Image> imageList;
+	// Randomly create images whose width/height is 10-50.
+	vector<ImageHandle> imageList;
 	imageList.reserve(GenerateBinCount);
-	mt19937 mt(InitialSeed);
+	mt19937 mt(RandomSeed);
 	uniform_int_distribution<int> range(10, 50);
 
-	// Generate bins to be packed
-	for (u32 i = 0; i < GenerateBinCount; ++i)
+	for (int i = 0; i < GenerateBinCount; ++i)
 	{
 		Image img(range(mt), range(mt), 1, 3);
 		unsigned char color[3];
 		RandomColor(color);
 		fillPixel(img, color);
-		imageList.push_back(img);
+
+		ImageHandle handle;
+		handle.image = img;
+		handle.id = 0;
+		imageList.push_back(handle);
 	}
 
-	ImagePacker packer;
-	int id = 0;
-	for (auto& img : imageList)
+	// Packing images
+	// Image packer whose atlas image is 1024px width/height.
+	ImagePacker packer(1024, 1024);
+	for (auto& handle : imageList)
 	{
-		auto result = packer.insert(img, id);
+		auto result = packer.insert(handle.image, handle.id);
 		if (!result)
 			break;
 	}
 
-	packer.save("result.bmp");
+	// Access test to a node using id
+	for (auto& handle : imageList)
+	{
+		auto* nodePtr = packer.getNode(handle.id);
+		if (nodePtr != nullptr)
+		{
+			// your own process...
+		}
+	}
+
+	packer.save(AtlasFileName);
 	exit(0);
 }

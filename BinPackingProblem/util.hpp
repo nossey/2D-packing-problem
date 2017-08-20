@@ -1,5 +1,6 @@
 #pragma once
 
 #define SAFE_DELETE(ptr)\
-	delete(ptr);\
-	ptr = nullptr;
+	if (ptr != nullptr)\
+		delete(ptr);\
+		ptr = nullptr;

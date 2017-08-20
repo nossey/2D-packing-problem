@@ -25,7 +25,7 @@ void copy(const Image& src, Image& dst)
 	}
 }
 
-void copy(const Image& src, Image& dst, s32 x_offset, s32 y_offset)
+void copy(const Image& src, Image& dst, int x_offset, int y_offset)
 {
 	if (!contain(src, dst))
 		return;

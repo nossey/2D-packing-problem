@@ -6,8 +6,8 @@ using namespace std;
 
 namespace
 {
-	const u32 AtlasWidth = 1024;
-	const u32 AtlasHeight = 1024;
+	const unsigned int AtlasWidth = 1024;
+	const unsigned int AtlasHeight = 1024;
 }
 
 ImagePacker::ImagePacker()
@@ -15,11 +15,29 @@ ImagePacker::ImagePacker()
 	mRootNodePtr = new Node();
 	Rect rc;
 	rc.l = 0;
-	rc.r = static_cast<s32>(AtlasWidth) - 1;
+	rc.r = static_cast<int>(AtlasWidth) - 1;
 	rc.t = 0;
-	rc.b = static_cast<s32>(AtlasHeight) - 1;
+	rc.b = static_cast<int>(AtlasHeight) - 1;
 	mRootNodePtr->setRect(rc);
 	mImage = Image(AtlasWidth, AtlasHeight, 1, 3);
+
+	unsigned char color[3];
+	color[0] = 100;
+	color[1] = 100;
+	color[2] = 100;
+	fillPixel(mImage, color);
+}
+
+ImagePacker::ImagePacker(unsigned int atlasWidth, unsigned int atlasHeight)
+{
+	mRootNodePtr = new Node();
+	Rect rc;
+	rc.l = 0;
+	rc.r = static_cast<int>(atlasWidth) - 1;
+	rc.t = 0;
+	rc.b = static_cast<int>(atlasHeight) - 1;
+	mRootNodePtr->setRect(rc);
+	mImage = Image(atlasWidth, atlasHeight, 1, 3);
 
 	unsigned char color[3];
 	color[0] = 100;
@@ -66,6 +84,11 @@ bool ImagePacker::unregister(int id)
 	mAccessor.unregisterData(id);
 	SAFE_DELETE(nodePtr);
 	return true;
+}
+
+Node* ImagePacker::getNode(int id)
+{
+	return mAccessor.getData(id);
 }
 
 void ImagePacker::deleteNode(Node* nodePtr)
