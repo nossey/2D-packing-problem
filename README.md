@@ -2,6 +2,8 @@
 This project demonstrates a solver for bin-packing problem.<br>
 We utilize <a href="http://blackpawn.com/texts/lightmaps/default.html">this</a> algorithm.
 
+![BinPacking](./images/bin-packing.png "BinPacking")
+
 ## Getting Started
 ### Prerequisties
 C++ is required to build.
