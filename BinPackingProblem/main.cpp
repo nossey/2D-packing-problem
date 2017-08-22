@@ -9,7 +9,8 @@ using namespace std;
 namespace
 {
 	const string AtlasFileName = "result.bmp";
-	const unsigned int GenerateBinCount = 500;
+	const unsigned int GenerateBinCount = 1000;
+	const unsigned int RandomlyDeleteNodeCount = 500;
 	const unsigned int RandomSeed = 0;
 
 	mt19937 GlobalMt(RandomSeed);
@@ -19,6 +20,21 @@ namespace
 		color[0] = ColorRange(GlobalMt);
 		color[1] = ColorRange(GlobalMt);
 		color[2] = ColorRange(GlobalMt);
+	}
+
+
+	template<typename Iter, typename RandomGenerator>
+	Iter select_randomly(Iter start, Iter end, RandomGenerator& g) {
+		std::uniform_int_distribution<> dis(0, std::distance(start, end) - 1);
+		std::advance(start, dis(g));
+		return start;
+	}
+
+	template<typename Iter>
+	Iter select_randomly(Iter start, Iter end) {
+		static std::random_device rd;
+		static std::mt19937 gen(rd());
+		return select_randomly(start, end, gen);
 	}
 }
 
@@ -59,15 +75,13 @@ void main()
 			break;
 	}
 
-	// Access test to a node using id
-	for (auto& handle : imageList)
-	{
-		auto* nodePtr = packer.getNode(handle.id);
-		if (nodePtr != nullptr)
-		{
-			// your own process...
-		}
-	}
+	// Randomly unregister test
+	//for (auto i = 0; i < RandomlyDeleteNodeCount; ++i)
+	//{
+	//	auto itr = select_randomly(imageList.begin(), imageList.end());
+	//	packer.unregister(itr->id);
+	//	imageList.erase(itr);
+	//}
 
 	packer.save(AtlasFileName);
 	exit(0);

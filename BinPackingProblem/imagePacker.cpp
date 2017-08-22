@@ -80,9 +80,30 @@ bool ImagePacker::unregister(int id)
 	{
 		return false;
 	}
-
 	mAccessor.unregisterData(id);
-	SAFE_DELETE(nodePtr);
+
+	nodePtr->setUsed(false);
+	unsigned char color[3];
+	color[0] = 100;
+	color[1] = 100;
+	color[2] = 100;
+	fillPixel(mImage, nodePtr->getRect(), color);
+
+	auto *parent = nodePtr->getParent();
+	if (parent != nullptr)
+	{
+		auto* lc = parent->getLeftChild();
+		auto* rc = parent->getRightChild();
+		if (lc != nullptr && rc != nullptr)
+		{
+			if (!lc->isUsed() && !rc->isUsed() && lc->isLeaf() && rc->isLeaf())
+			{
+				SAFE_DELETE(rc);
+				SAFE_DELETE(lc);
+			}
+		}
+	}
+
 	return true;
 }
 

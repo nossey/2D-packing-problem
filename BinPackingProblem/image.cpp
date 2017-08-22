@@ -63,3 +63,14 @@ void fillPixel(Image& img, unsigned char color[3])
 		}
 	}
 }
+
+void fillPixel(Image& img, const Rect& rc, unsigned char color[3])
+{
+	for (auto height = rc.t; height <= rc.b; ++height)
+	{
+		for (auto width = rc.l; width <= rc.r; ++width)
+		{
+			img.draw_point(width, height, color);
+		}
+	}
+}

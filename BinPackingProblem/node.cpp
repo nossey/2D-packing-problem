@@ -18,7 +18,8 @@ namespace
 Node::Node() :
 	mRect(0, 0, 0, 0),
 	mID(INVALID_NODE_ID),
-	mUsed(false)
+	mUsed(false),
+	mParentNode(nullptr)
 {
 	mChildNode[0] = mChildNode[1] = nullptr;
 }

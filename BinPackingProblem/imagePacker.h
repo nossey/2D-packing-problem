@@ -2,6 +2,7 @@
 
 #include "image.h"
 #include "hashAccessor.h"
+#include "rect.h"
 #include <string>
 
 class Node;

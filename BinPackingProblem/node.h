@@ -18,17 +18,17 @@ public:
 	int getID() const;
 	void setID(int id);
 	bool isUsed() const;
+	void setUsed(bool flag);
 
 	Node* getParent();
 	Node* getLeftChild();
 	Node* getRightChild();
 	bool isLeaf() const;
+	bool isChildrenEmpty();
 private:
 	Node* mParentNode;
 	Node* mChildNode[2];
 	Rect mRect;
 	int mID;
 	bool mUsed;
-
-	void setUsed(bool flag);
 };
