@@ -1,5 +1,5 @@
-# Bin-packing problem
-This project demonstrates a solver for bin-packing problem.<br>
+# 2D packing problem
+This project demonstrates a solver for 2D packing problem.<br>
 We utilize <a href="http://blackpawn.com/texts/lightmaps/default.html">this</a> algorithm.
 
 ![BinPacking](./images/bin-packing.png "BinPacking")
