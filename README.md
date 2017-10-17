@@ -46,7 +46,7 @@ packer.save("result.bmp");
 ```
 
 ## Author
-nossey
+nossey :)
 
 ## License
 This project uses <a href="http://cimg.eu/">CImg</a> library for image process.<br>

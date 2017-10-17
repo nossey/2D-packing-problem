@@ -76,12 +76,12 @@ void main()
 	}
 
 	// Randomly unregister test
-	//for (auto i = 0; i < RandomlyDeleteNodeCount; ++i)
-	//{
-	//	auto itr = select_randomly(imageList.begin(), imageList.end());
-	//	packer.unregister(itr->id);
-	//	imageList.erase(itr);
-	//}
+	for (auto i = 0; i < RandomlyDeleteNodeCount; ++i)
+	{
+		auto itr = select_randomly(imageList.begin(), imageList.end());
+		packer.unregister(itr->id);
+		imageList.erase(itr);
+	}
 
 	packer.save(AtlasFileName);
 	exit(0);
